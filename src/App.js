@@ -1,5 +1,4 @@
 import realtime from './firebase';
-import { ref, onValue, push } from 'firebase/database'
 import './App.css';
 
 function App() {
