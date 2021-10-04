@@ -1,4 +1,4 @@
-
+import realtime from './firebase';
 import './App.css';
 
 function App() {
