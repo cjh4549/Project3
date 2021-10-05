@@ -1,6 +1,7 @@
 import realtime from './firebase';
 import {useState, useEffect} from 'react';
 import {ref, onValue} from 'firebase/database'
+import Note from './Note';
 
 
 function App() {
@@ -8,7 +9,6 @@ function App() {
   const [notes, setNotes] = useState([]);
 
   useEffect(() => {
-
     const dbRef = ref(realtime);
 
     onValue(dbRef, (snapshot) => {
@@ -23,17 +23,31 @@ function App() {
         }
 
         newArray.push(noteObject);
+        
       }
 
+      console.log(newArray)
       setNotes(newArray);
       
     })
-
   }, []);
 
   return (
     <div className="App">
       <h1>Google Keep Inspired Project</h1>
+      <ul>
+        {
+          notes.map((note, index) => {
+            return(
+              <Note 
+                key={index}
+                title={note.title}
+                note={note.note}
+              />
+            )
+          })
+        }
+      </ul>
     </div>
   );
 }
