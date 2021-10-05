@@ -12,7 +12,21 @@ function App() {
     const dbRef = ref(realtime);
 
     onValue(dbRef, (snapshot) => {
-      console.log(snapshot.val());
+      const dbObject = snapshot.val();
+
+      const newArray = [];
+
+      for (let property in dbObject) {
+        const noteObject = {
+          title: property,
+          note: dbObject[property]
+        }
+
+        newArray.push(noteObject);
+      }
+
+      setNotes(newArray);
+      
     })
 
   }, []);
