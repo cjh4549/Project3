@@ -1,4 +1,4 @@
-import realtime from './firebase';
+// import realtime from './firebase';
 
 function App() {
   return (
