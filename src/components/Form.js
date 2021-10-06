@@ -1,4 +1,4 @@
-import { ref, push } from '@firebase/database';
+import {ref, push} from '@firebase/database';
 import realtime from './firebase';
 import {useState} from 'react';
 
