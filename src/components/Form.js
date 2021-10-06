@@ -12,8 +12,13 @@ function Form(){
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const dbRef = ref(realtime);
-        push(dbRef, userInput);
+        if (userInput) {
+            const dbRef = ref(realtime);
+            push(dbRef, userInput);
+        } else {
+            alert("You can't leave it blank!");
+        }
+        
     }
 
     return(
