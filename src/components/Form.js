@@ -15,6 +15,7 @@ function Form(){
         if (userInput) {
             const dbRef = ref(realtime);
             push(dbRef, userInput);
+            setUserInput('');
         } else {
             alert("You can't leave it blank!");
         }

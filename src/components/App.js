@@ -1,6 +1,6 @@
 import realtime from './firebase';
 import {useState, useEffect} from 'react';
-import {ref, onValue, push} from 'firebase/database'
+import {ref, onValue} from 'firebase/database'
 import Note from './Note';
 import Form from './Form';
 
