@@ -1,17 +1,25 @@
+import { ref, push } from '@firebase/database';
+import realtime from './firebase';
 import {useState} from 'react';
 
 function Form(){
 
     const [userInput, setUserInput] = useState("");
 
-    const handleChange = () => {
-        console.log('changed!')
+    const handleChange = (e) => {
+        setUserInput(e.target.value);
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const dbRef = ref(realtime);
+        push(dbRef, userInput);
     }
 
     return(
-        <form>
+        <form onSubmit={handleSubmit}>
             <label htmlFor="userNote">Title</label>
-            <input onChange={handleChange} type="text" id="userNote" placeholder="Take a note..."/>
+            <input onChange={handleChange} value={userInput} type="text" id="userNote" placeholder="Take a note..."/>
             <button>Add</button>
         </form>
     )
