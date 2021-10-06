@@ -18,9 +18,10 @@ function App() {
       const newArray = [];
 
       for (let propertyTitle in dbObject) {
+        console.log(dbObject[propertyTitle].noteBody);
         const noteObject = {
-          title: propertyTitle,
-          note: dbObject[propertyTitle]
+          title: dbObject[propertyTitle].noteTitle,
+          note: dbObject[propertyTitle].noteBody,
         }
 
         newArray.push(noteObject);
