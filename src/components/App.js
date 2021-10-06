@@ -2,6 +2,7 @@ import realtime from './firebase';
 import {useState, useEffect} from 'react';
 import {ref, onValue} from 'firebase/database'
 import Note from './Note';
+import Form from './Form';
 
 
 function App() {
@@ -16,17 +17,16 @@ function App() {
 
       const newArray = [];
 
-      for (let property in dbObject) {
+      for (let propertyTitle in dbObject) {
         const noteObject = {
-          title: property,
-          note: dbObject[property]
+          title: propertyTitle,
+          note: dbObject[propertyTitle]
         }
 
         newArray.push(noteObject);
         
       }
 
-      console.log(newArray)
       setNotes(newArray);
       
     })
@@ -35,12 +35,13 @@ function App() {
   return (
     <div className="App">
       <h1>Google Keep Inspired Project</h1>
+      <Form />
       <ul>
         {
-          notes.map((note, index) => {
+          notes.map((note) => {
             return(
               <Note 
-                key={index}
+                key={note.title}
                 title={note.title}
                 note={note.note}
               />
