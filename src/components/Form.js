@@ -4,9 +4,6 @@ import {useState} from 'react';
 
 function Form(){
 
-    // const [userInput, setUserInput] = useState("");
-    // const [userNote, setUserNote] = useState("");
-
     const [noteInfo, setNoteInfo] = useState({title: "", note: ""});
 
     const handleChange = (e) => {
@@ -16,18 +13,15 @@ function Form(){
         });
     }
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const dbRef = ref(realtime);
-        push(dbRef, noteInfo);
-
-        // if (userInput) {
-        //     const dbRef = ref(realtime);
-        //     push(dbRef, userInput);
-        //     setUserInput('');
-        // } else {
-        //     alert("You can't leave it blank!");
-        // }
+    const handleSubmit = (e) => {      
+        if (userInput) {
+            e.preventDefault();
+            const dbRef = ref(realtime);
+            push(dbRef, userInput);
+            setUserInput('');
+        } else {
+            alert("You can't leave it blank!");
+        }
         
     }
 

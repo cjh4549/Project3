@@ -13,37 +13,22 @@ function App() {
     const dbRef = ref(realtime);
 
     onValue(dbRef, (snapshot) => {
-      const dbObject = snapshot.val(); // firebase object
+      const dbObject = snapshot.val(); // firebase object that captures all the objects
 
       const newArray = [];
 
-      // dbObject.map((dbChild) => {
-      //   const noteObject = {
-      //     title: dbObject[dbChild].title,
-      //     note: dbObject[dbChild].note,
-      //   } 
+      for (let keyProperty in dbObject) {
+            // dbObject:
+            // {
+            //   -MlPBXN3lmdWy6OoAesU (how do I target this??) : {note: 'world', title: 'hello'}
+            //   -MlPD4JGimdlKlWJRhg1: {note: 'test', title: 'test'}
+            //   -MlPG4BKDxsikTvJAgTQ: {note: 'afasf', title: 'a'}
+            // }
 
-      //   newArray.push(noteObject)
-      //   console.log(newArray);
-
-      // })
-
-      for (let dbChild in dbObject) { // dbChild -MlO80DMbGq6q5cD25mK
-
-        // const specificNode = ref(realtime, dbChild)
-        // remove(specificNode)       < --- This worked!!!
-
-        const noteObject = { // just an object
-          title: dbObject[dbChild].title,
-          note: dbObject[dbChild].note,
-        }
-
-        newArray.push(dbChild);
-        console.log(newArray)
+        // Hello, as you can tell my app is not finished... I spent the whole night trying to figure out on my last step of targeting the parent node/key that pointed to the individual object that stores the user's inputs so that I could pass that onto my Note component as props and have my button element invoke handleDelete and delete that parent node, but I had a mini meltdown and just couldn't figure it out and hence I didn't even get to CSS...
       }
-
-      setNotes(newArray); // [ {just an object} ]
       
+      setNotes (newArray)
     })
   }, []);
 
@@ -53,11 +38,10 @@ function App() {
       <Form />
       <ul>
         {
-          notesArray.map((noteIndividualObj, index) => { //just an object
+          notesArray.map((noteIndividualObj, index) => { 
             return(
               <Note 
                 key={index}
-                node={noteIndividualObj}
                 title={noteIndividualObj.title}
                 note={noteIndividualObj.note}
               />
