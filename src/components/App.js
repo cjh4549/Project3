@@ -1,34 +1,48 @@
 import realtime from './firebase';
 import {useState, useEffect} from 'react';
-import {ref, onValue} from 'firebase/database'
+import {ref, onValue, remove} from 'firebase/database'
 import Note from './Note';
 import Form from './Form';
 
 
 function App() {
 
-  const [notes, setNotes] = useState([]);
+  const [notesArray, setNotes] = useState([]);
 
   useEffect(() => {
     const dbRef = ref(realtime);
 
     onValue(dbRef, (snapshot) => {
-      const dbObject = snapshot.val();
+      const dbObject = snapshot.val(); // firebase object
 
       const newArray = [];
 
-      for (let dbChild in dbObject) {
+      // dbObject.map((dbChild) => {
+      //   const noteObject = {
+      //     title: dbObject[dbChild].title,
+      //     note: dbObject[dbChild].note,
+      //   } 
 
-        const noteObject = {
-          title: dbObject[dbChild].noteTitle,
-          note: dbObject[dbChild].noteBody,
+      //   newArray.push(noteObject)
+      //   console.log(newArray);
+
+      // })
+
+      for (let dbChild in dbObject) { // dbChild -MlO80DMbGq6q5cD25mK
+
+        // const specificNode = ref(realtime, dbChild)
+        // remove(specificNode)       < --- This worked!!!
+
+        const noteObject = { // just an object
+          title: dbObject[dbChild].title,
+          note: dbObject[dbChild].note,
         }
 
-        newArray.push(noteObject);
-        
+        newArray.push(dbChild);
+        console.log(newArray)
       }
 
-      setNotes(newArray);
+      setNotes(newArray); // [ {just an object} ]
       
     })
   }, []);
@@ -39,12 +53,13 @@ function App() {
       <Form />
       <ul>
         {
-          notes.map((note) => {
+          notesArray.map((noteIndividualObj, index) => { //just an object
             return(
               <Note 
-                key={note.title}
-                title={note.title}
-                note={note.note}
+                key={index}
+                node={noteIndividualObj}
+                title={noteIndividualObj.title}
+                note={noteIndividualObj.note}
               />
             )
           })
