@@ -4,12 +4,9 @@ import {useState} from 'react';
 
 function Note(props) {
 
-    const [titleNode, setTitleNode] = useState("");
-
     const handleDelete = (title) => {
         const childNode = ref(realtime, title);
         remove(childNode);
-        setTitleNode(title);
     }
 
     return (
