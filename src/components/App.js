@@ -17,11 +17,11 @@ function App() {
 
       const newArray = [];
 
-      for (let propertyTitle in dbObject) {
-        console.log(dbObject[propertyTitle].noteBody);
+      for (let dbChild in dbObject) {
+
         const noteObject = {
-          title: dbObject[propertyTitle].noteTitle,
-          note: dbObject[propertyTitle].noteBody,
+          title: dbObject[dbChild].noteTitle,
+          note: dbObject[dbChild].noteBody,
         }
 
         newArray.push(noteObject);
