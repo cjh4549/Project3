@@ -31,27 +31,26 @@ function Form(){
         
     }
 
-
-    // const handleSubmit2 = (e) => {
-    //     e.preventDefault();
-    //     if (userNote) {
-    //         const childNode = ref(realtime, userNote);
-    //         push(childNode);
-    //         setUserNote('');
-    //     } else {
-    //         alert("You can't leave it blank!");
-    //     }
-        
-    // }
-
     return(
-            <form>
+            <form onSubmit={handleSubmit}>
                 <label htmlFor="noteTitle">Title</label>
-                <input onChange={handleChange} value={noteInfo.noteTitle} type="text" id="noteTitle" placeholder="Title" name="noteTitle"/>
+                <input onChange={handleChange} 
+                    value={noteInfo.title} 
+                    type="text" 
+                    id="noteTitle" 
+                    placeholder="Title" 
+                    name="title"
+                />
 
                 <label htmlFor="noteBody">Note</label>
-                <input onChange={handleChange} value={noteInfo.noteBody} type="text" id="noteBody" placeholder="Take a note..." name="noteBody"/>
-                <button onClick={handleSubmit}>Add</button>
+                <input onChange={handleChange} 
+                    value={noteInfo.note} 
+                    type="text" 
+                    id="noteBody" 
+                    placeholder="Take a note..." 
+                    name="note"
+                />
+                <button>Add</button>
             </form>
     )
 }
