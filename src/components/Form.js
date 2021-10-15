@@ -4,9 +4,6 @@ import {useState} from 'react';
 
 function Form(){
 
-    // const [userInput, setUserInput] = useState("");
-    // const [userNote, setUserNote] = useState("");
-
     const [noteInfo, setNoteInfo] = useState({title: "", note: ""});
 
     const handleChange = (e) => {
