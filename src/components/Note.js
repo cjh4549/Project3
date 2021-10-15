@@ -1,23 +1,26 @@
 import realtime from './firebase';
-import {ref, remove, child, push, onValue, parent} from '@firebase/database';
+import {ref, remove } from '@firebase/database';
 
 function Note(props) { // just an object
 
-    const handleDelete = (node) => {
-        const key = ref(realtime, node)
-        remove(key);
-        
-        // console.log(specificNode)
+    // const handleDelete = (keyToDelete) => {
+    //     const parentNodeRef = ref(realtime, keyToDelete)
+    //     remove(parentNodeRef)
+    // 
 
-       
-    }
+    const handleDelete = () => {
+        const parentNodeRef = ref(realtime, props.dbkey)
+        remove(`${parentNodeRef}/title`)
+      } 
 
+    console.log(props.title);
+    
     return (
         <>
             <li key={props.title}>
                 <p>{props.title}</p>
                 <p>{props.note}</p>
-                <button onClick={() => handleDelete(props.node)}>Delete</button>
+                <button onClick={() => {handleDelete()}}>Delete</button>
             </li>
         </>
     )
